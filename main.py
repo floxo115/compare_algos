@@ -1,24 +1,20 @@
 import configparser
+import json
 import pathlib
 import re
 import sys
-from collections import defaultdict
+from collections import Counter
 from functools import partial
 from itertools import product
-from pprint import pprint
-from typing import Dict
-
-from sklearn.linear_model import LogisticRegression
-from sklearn.neighbors import KNeighborsClassifier
-from tqdm import tqdm
-
-import json
+from multiprocessing import Pool
+from typing import Dict, List
 
 import pandas as pd
 from sklearn.ensemble import RandomForestClassifier
+from sklearn.linear_model import LogisticRegression
+from sklearn.neighbors import KNeighborsClassifier
 from sklearn.tree import DecisionTreeClassifier
-
-from multiprocessing import Pool
+from tqdm import tqdm
 
 config_parser = configparser.ConfigParser()
 config_parser.read("config.ini", encoding="utf-8")
@@ -28,21 +24,36 @@ N_PROCESSES = config_parser.getint("testing", "n_processes")
 dataset_path = pathlib.Path("./data")
 new_dataset_path = dataset_path.joinpath("datasets_for_comparison")
 
+
 def get_artificial_ds():
     data_sets = [f.stem.split("_")[0] for f in new_dataset_path.glob("*.csv")]
 
-    all_artifical_dataset_fns = [fn for fn in data_sets if re.match(r"\d+", fn)]
+    all_artifical_dataset_fns = list(Counter([fn for fn in data_sets if re.match(r"\d+", fn)]).keys())
     return all_artifical_dataset_fns
 
-def run_test(dataset_name: str, model_name: str,  model_cls, parameter_grid: Dict, categotrical_to_onehot=False) -> Dict:
-    train_data = pd.read_csv(new_dataset_path.joinpath(f"{dataset_name}_train.csv"), index_col=0).to_numpy()
-    val_data = pd.read_csv(new_dataset_path.joinpath(f"{dataset_name}_val.csv"), index_col=0).to_numpy()
-    test_data = pd.read_csv(new_dataset_path.joinpath(f"{dataset_name}_test.csv"), index_col=0).to_numpy()
+
+def get_adult_ds():
+    data_sets = list(Counter([f.stem.split("_")[0] for f in new_dataset_path.glob("adult*.csv")]).keys())
+    return data_sets
+
+
+def run_test_on_dataset(dataset_name: str, model_name: str, model_cls, parameter_grid: Dict,
+                        categotrical_to_onehot=False) -> Dict:
+
+    if categotrical_to_onehot:
+        one_hot = "_one_hot"
+    else:
+        one_hot = ""
+
+    train_data = pd.read_csv(new_dataset_path.joinpath(f"{dataset_name}_train{one_hot}.csv"), index_col=0).to_numpy()
+    val_data = pd.read_csv(new_dataset_path.joinpath(f"{dataset_name}_val{one_hot}.csv"), index_col=0).to_numpy()
+    test_data = pd.read_csv(new_dataset_path.joinpath(f"{dataset_name}_test{one_hot}.csv"), index_col=0).to_numpy()
 
     best_val_score = float("-inf")
     best_params = None
     best_model = None
-    for values in tqdm(product(*parameter_grid.values()), total=len(list(product(*parameter_grid.values()))), file=sys.stdout):
+    for values in tqdm(product(*parameter_grid.values()), total=len(list(product(*parameter_grid.values()))),
+                       file=sys.stdout):
         params = dict(zip(parameter_grid.keys(), values))
         try:
             model = model_cls(**params, random_state=SEED)
@@ -63,11 +74,24 @@ def run_test(dataset_name: str, model_name: str,  model_cls, parameter_grid: Dic
     test_score = best_model.score(test_data[:, :-1], test_data[:, -1])
     # print(test_score)
 
-    return {"model_cls": model_name, "dataset": dataset_name, "is_one_hot": categotrical_to_onehot, "best_params": best_params, "test_score": test_score, "val_score": best_val_score}
+    return {"model_cls": model_name, "dataset": dataset_name, "is_one_hot": categotrical_to_onehot,
+            "best_params": best_params, "test_score": test_score, "val_score": best_val_score}
+
+
+def run_test(datasets_names: List[str], model_name: str, model_cls, parameter_grid: Dict,
+             categotrical_to_onehot=False) -> List:
+    t = partial(run_test_on_dataset, model_name=model_name,
+                model_cls=model_cls,
+                parameter_grid=parameter_grid,
+                categotrical_to_onehot=categotrical_to_onehot
+                )
+    with Pool(N_PROCESSES) as p:
+        results = p.map(t, dataset_names)
+
+    return results
 
 
 if __name__ == "__main__":
-    dataset_names = get_artificial_ds()
 
     decision_tree_param_grid = {
         "criterion": ["gini", "entropy"],
@@ -78,16 +102,6 @@ if __name__ == "__main__":
         "ccp_alpha": [0.0, 0.0001, 0.001, 0.01]
     }
 
-
-    t = partial(run_test, model_name="DecisionTreeClassifier",
-                model_cls=DecisionTreeClassifier,
-                parameter_grid=decision_tree_param_grid)
-    with Pool(N_PROCESSES) as p:
-        results = p.map(t, dataset_names)
-
-    with open("results_artificial_datasets_decision_tree.json", "w") as f:
-        json.dump(results, f)
-
     random_forest_param_grid = {
         "n_estimators": [100, 200, 300],
         "max_depth": [10, 20, 30],
@@ -97,29 +111,12 @@ if __name__ == "__main__":
         "bootstrap": [True, False],
     }
 
-    t = partial(run_test, model_name="RandomForest",
-                model_cls=RandomForestClassifier,
-                parameter_grid=random_forest_param_grid)
-    with Pool(N_PROCESSES) as p:
-        results = p.map(t, dataset_names)
-    with open("results_artificial_datasets_random_forest.json", "w") as f:
-        json.dump(results, f)
-
     log_reg_param_grid = {
         "solver": ["liblinear", "lbfgs", "saga"],
         "C": [0.01, 0.1, 1, 10, 100],
         "max_iter": [100, 200, 500],
         "class_weight": [None, "balanced"],
     }
-
-    t = partial(run_test, model_name="LogisticRegression",
-                model_cls=LogisticRegression,
-                parameter_grid=log_reg_param_grid)
-    with Pool(N_PROCESSES) as p:
-        results = p.map(t, dataset_names)
-    with open("results_artificial_datasets_logistic_regression.json", "w") as f:
-        json.dump(results, f)
-
 
     nn_param_grid = {
         "n_neighbors": list(range(1, 21)),
@@ -128,10 +125,56 @@ if __name__ == "__main__":
         "p": [1, 2]
     }
 
-    t = partial(run_test, model_name="NearestNeighbor",
-                model_cls=KNeighborsClassifier,
-                parameter_grid=nn_param_grid)
-    with Pool(N_PROCESSES) as p:
-        results = p.map(t, dataset_names)
-    with open("results_artificial_datasets_nearest_neighbor.json", "w") as f:
-        json.dump(results, f)
+    dataset_names = get_artificial_ds()
+    run_info = [
+        (dataset_names, "DecisionTreeClassifier", DecisionTreeClassifier, decision_tree_param_grid,
+         "results_artificial_datasets_decision_tree.json"),
+        (dataset_names, "RandomForestClassifier", RandomForestClassifier, random_forest_param_grid,
+         "results_artificial_datasets_random_forest.json"),
+        (dataset_names, "LogisticRegression", LogisticRegression, log_reg_param_grid,
+         "results_artificial_datasets_logistic_regression.json"),
+        (dataset_names, "KNeighborsClassifier", KNeighborsClassifier, nn_param_grid,
+         "results_artificial_datasets_nearest_neighbor.json"),
+    ]
+
+    for info in run_info:
+        results = run_test(datasets_names=info[0], model_name=info[1], model_cls=info[2], parameter_grid=info[3],
+                           categotrical_to_onehot=False)
+        with open(info[4], "w") as f:
+            json.dump(results, f)
+
+    dataset_names = get_adult_ds()
+    run_info = [
+        # (dataset_names, "DecisionTreeClassifier", DecisionTreeClassifier, decision_tree_param_grid,
+        #  "results_adult_datasets_decision_tree.json"),
+        # (dataset_names, "RandomForestClassifier", RandomForestClassifier, random_forest_param_grid,
+        #  "results_adult_datasets_random_forest.json"),
+        # (dataset_names, "LogisticRegression", LogisticRegression, log_reg_param_grid,
+        #  "results_adult_datasets_logistic_regression.json", False),
+        # (dataset_names, "KNeighborsClassifier", KNeighborsClassifier, nn_param_grid,
+        #  "results_adult_datasets_nearest_neighbor.json"),
+    ]
+
+    for info in run_info:
+        results = run_test(datasets_names=info[0], model_name=info[1], model_cls=info[2], parameter_grid=info[3],
+                           categotrical_to_onehot=info[5])
+        with open(info[4], "w") as f:
+            json.dump(results, f)
+
+    dataset_names = get_adult_ds()
+    run_info = [
+        # (dataset_names, "DecisionTreeClassifier", DecisionTreeClassifier, decision_tree_param_grid,
+        #  "results_adult_datasets_decision_tree.json"),
+        # (dataset_names, "RandomForestClassifier", RandomForestClassifier, random_forest_param_grid,
+        #  "results_adult_datasets_random_forest.json"),
+        # (dataset_names, "LogisticRegression", LogisticRegression, log_reg_param_grid,
+        #  "results_adult_datasets_logistic_regression_one_hot.json", True),
+        # (dataset_names, "KNeighborsClassifier", KNeighborsClassifier, nn_param_grid,
+        #  "results_adult_datasets_nearest_neighbor.json"),
+    ]
+
+    for info in run_info:
+        results = run_test(datasets_names=info[0], model_name=info[1], model_cls=info[2], parameter_grid=info[3],
+                           categotrical_to_onehot=info[5])
+        with open(info[4], "w") as f:
+            json.dump(results, f)
