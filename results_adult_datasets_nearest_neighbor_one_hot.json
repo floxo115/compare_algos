@@ -1,0 +1,1 @@
+[{"model_cls": "KNeighborsClassifier", "dataset": "adult", "is_one_hot": true, "best_params": {"n_neighbors": 17, "weights": "uniform", "metric": "euclidean", "p": 1}, "test_score": 0.8223010782039034, "val_score": 0.8260988260988261}]

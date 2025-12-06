@@ -1,0 +1,1 @@
+[{"model_cls": "RandomForestClassifier", "dataset": "adult", "is_one_hot": true, "best_params": {"n_estimators": 100, "max_depth": 30, "min_samples_split": 10, "min_samples_leaf": 4, "max_features": "sqrt", "bootstrap": true}, "test_score": 0.8295345980619626, "val_score": 0.8334698334698335}]

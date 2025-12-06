@@ -125,34 +125,34 @@ if __name__ == "__main__":
         "p": [1, 2]
     }
 
-    dataset_names = get_artificial_ds()
-    run_info = [
-        (dataset_names, "DecisionTreeClassifier", DecisionTreeClassifier, decision_tree_param_grid,
-         "results_artificial_datasets_decision_tree.json"),
-        (dataset_names, "RandomForestClassifier", RandomForestClassifier, random_forest_param_grid,
-         "results_artificial_datasets_random_forest.json"),
-        (dataset_names, "LogisticRegression", LogisticRegression, log_reg_param_grid,
-         "results_artificial_datasets_logistic_regression.json"),
-        (dataset_names, "KNeighborsClassifier", KNeighborsClassifier, nn_param_grid,
-         "results_artificial_datasets_nearest_neighbor.json"),
-    ]
-
-    for info in run_info:
-        results = run_test(datasets_names=info[0], model_name=info[1], model_cls=info[2], parameter_grid=info[3],
-                           categotrical_to_onehot=False)
-        with open(info[4], "w") as f:
-            json.dump(results, f)
+    # dataset_names = get_artificial_ds()
+    # run_info = [
+    #     (dataset_names, "DecisionTreeClassifier", DecisionTreeClassifier, decision_tree_param_grid,
+    #      "results_artificial_datasets_decision_tree.json"),
+    #     (dataset_names, "RandomForestClassifier", RandomForestClassifier, random_forest_param_grid,
+    #      "results_artificial_datasets_random_forest.json"),
+    #     (dataset_names, "LogisticRegression", LogisticRegression, log_reg_param_grid,
+    #      "results_artificial_datasets_logistic_regression.json"),
+    #     (dataset_names, "KNeighborsClassifier", KNeighborsClassifier, nn_param_grid,
+    #      "results_artificial_datasets_nearest_neighbor.json"),
+    # ]
+    #
+    # for info in run_info:
+    #     results = run_test(datasets_names=info[0], model_name=info[1], model_cls=info[2], parameter_grid=info[3],
+    #                        categotrical_to_onehot=False)
+    #     with open(info[4], "w") as f:
+    #         json.dump(results, f)
 
     dataset_names = get_adult_ds()
     run_info = [
-        # (dataset_names, "DecisionTreeClassifier", DecisionTreeClassifier, decision_tree_param_grid,
-        #  "results_adult_datasets_decision_tree.json"),
-        # (dataset_names, "RandomForestClassifier", RandomForestClassifier, random_forest_param_grid,
-        #  "results_adult_datasets_random_forest.json"),
-        # (dataset_names, "LogisticRegression", LogisticRegression, log_reg_param_grid,
-        #  "results_adult_datasets_logistic_regression.json", False),
-        # (dataset_names, "KNeighborsClassifier", KNeighborsClassifier, nn_param_grid,
-        #  "results_adult_datasets_nearest_neighbor.json"),
+        (dataset_names, "DecisionTreeClassifier", DecisionTreeClassifier, decision_tree_param_grid,
+         "results_adult_datasets_decision_tree.json", False),
+        (dataset_names, "RandomForestClassifier", RandomForestClassifier, random_forest_param_grid,
+         "results_adult_datasets_random_forest.json", False),
+        (dataset_names, "LogisticRegression", LogisticRegression, log_reg_param_grid,
+         "results_adult_datasets_logistic_regression.json", False),
+        (dataset_names, "KNeighborsClassifier", KNeighborsClassifier, nn_param_grid,
+         "results_adult_datasets_nearest_neighbor.json", False),
     ]
 
     for info in run_info:
@@ -163,14 +163,14 @@ if __name__ == "__main__":
 
     dataset_names = get_adult_ds()
     run_info = [
-        # (dataset_names, "DecisionTreeClassifier", DecisionTreeClassifier, decision_tree_param_grid,
-        #  "results_adult_datasets_decision_tree.json"),
-        # (dataset_names, "RandomForestClassifier", RandomForestClassifier, random_forest_param_grid,
-        #  "results_adult_datasets_random_forest.json"),
-        # (dataset_names, "LogisticRegression", LogisticRegression, log_reg_param_grid,
-        #  "results_adult_datasets_logistic_regression_one_hot.json", True),
-        # (dataset_names, "KNeighborsClassifier", KNeighborsClassifier, nn_param_grid,
-        #  "results_adult_datasets_nearest_neighbor.json"),
+        (dataset_names, "DecisionTreeClassifier", DecisionTreeClassifier, decision_tree_param_grid,
+         "results_adult_datasets_decision_tree_one_hot.json", True),
+        (dataset_names, "RandomForestClassifier", RandomForestClassifier, random_forest_param_grid,
+         "results_adult_datasets_random_forest_one_hot.json", True),
+        (dataset_names, "LogisticRegression", LogisticRegression, log_reg_param_grid,
+         "results_adult_datasets_logistic_regression_one_hot.json", True),
+        (dataset_names, "KNeighborsClassifier", KNeighborsClassifier, nn_param_grid,
+         "results_adult_datasets_nearest_neighbor_one_hot.json", True),
     ]
 
     for info in run_info:

@@ -1,0 +1,1 @@
+[{"model_cls": "LogisticRegression", "dataset": "adult", "is_one_hot": true, "best_params": {"solver": "liblinear", "C": 0.01, "max_iter": 100, "class_weight": null}, "test_score": 0.8269414494336017, "val_score": 0.8301938301938302}]
