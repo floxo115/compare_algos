@@ -37,16 +37,17 @@ def create_artifical_datasets():
         val_df.to_csv(new_dataset_path.joinpath(f"{ds_name}_val.csv"), index_label="idx")
         test_df.to_csv(new_dataset_path.joinpath(f"{ds_name}_test.csv"), index_label="idx")
 
-        oh_enc = preprocessing.OneHotEncoder(sparse_output=False, handle_unknown="ignore", drop="if_binary")
-        oh_enc.fit(df.to_numpy()[:, categorical_idx[:-1]])
+        # oh_enc = preprocessing.OneHotEncoder(sparse_output=False, handle_unknown="ignore", drop="if_binary")
+        # oh_enc.fit(df.to_numpy()[:, categorical_idx[:-1]])
 
-        with open(str(new_dataset_path.joinpath(f"{ds_name}_one_hot_encoder.pkl")), "wb") as f:
-            dill.dump(oh_enc, f)
+        # with open(str(new_dataset_path.joinpath(f"{ds_name}_one_hot_encoder.pkl")), "wb") as f:
+        #     dill.dump(oh_enc, f)
 
-        pd.Series(categorical).to_csv(new_dataset_path.joinpath(f"{ds_name}_categorical_cols.csv"))
+        # pd.Series(categorical).to_csv(new_dataset_path.joinpath(f"{ds_name}_categorical_cols.csv"))
 
         num_cats = df.nunique()
-        num_cats.to_csv(str(new_dataset_path.joinpath(f"{ds_name}_num_cats.csv")), header=None)
+        # num_cats.to_csv(str(new_dataset_path.joinpath(f"{ds_name}_num_cats.csv")), header=None)
+        (df.max()+1).to_csv(new_dataset_path.joinpath(f"{ds_name}_num_cats.csv"), index=False, header=False)
 
 def create_adult_dataset():
     df = pd.read_csv(dataset_path.joinpath("adult.csv"))
@@ -96,7 +97,7 @@ def create_adult_dataset():
 
 def create_datasets():
     create_artifical_datasets()
+    create_adult_dataset()
 
 if __name__ == "__main__":
-    #create_datasets()
-    create_adult_dataset()
+    create_datasets()

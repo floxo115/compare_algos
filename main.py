@@ -37,8 +37,8 @@ def get_adult_ds():
     return data_sets
 
 
-def run_test_on_dataset(dataset_name: str, model_name: str, model_cls, parameter_grid: Dict,
-                        categotrical_to_onehot=False) -> Dict:
+def run_test_sklearn_models_on_dataset(dataset_name: str, model_name: str, model_cls, parameter_grid: Dict,
+                                       categotrical_to_onehot=False) -> Dict:
 
     if categotrical_to_onehot:
         one_hot = "_one_hot"
@@ -78,9 +78,9 @@ def run_test_on_dataset(dataset_name: str, model_name: str, model_cls, parameter
             "best_params": best_params, "test_score": test_score, "val_score": best_val_score}
 
 
-def run_test(datasets_names: List[str], model_name: str, model_cls, parameter_grid: Dict,
-             categotrical_to_onehot=False) -> List:
-    t = partial(run_test_on_dataset, model_name=model_name,
+def run_test_for_sklearn_models(datasets_names: List[str], model_name: str, model_cls, parameter_grid: Dict,
+                                categotrical_to_onehot=False) -> List:
+    t = partial(run_test_sklearn_models_on_dataset, model_name=model_name,
                 model_cls=model_cls,
                 parameter_grid=parameter_grid,
                 categotrical_to_onehot=categotrical_to_onehot
@@ -138,7 +138,7 @@ if __name__ == "__main__":
     # ]
     #
     # for info in run_info:
-    #     results = run_test(datasets_names=info[0], model_name=info[1], model_cls=info[2], parameter_grid=info[3],
+    #     results = run_test_for_sklearn_models(datasets_names=info[0], model_name=info[1], model_cls=info[2], parameter_grid=info[3],
     #                        categotrical_to_onehot=False)
     #     with open(info[4], "w") as f:
     #         json.dump(results, f)
@@ -156,8 +156,8 @@ if __name__ == "__main__":
     ]
 
     for info in run_info:
-        results = run_test(datasets_names=info[0], model_name=info[1], model_cls=info[2], parameter_grid=info[3],
-                           categotrical_to_onehot=info[5])
+        results = run_test_for_sklearn_models(datasets_names=info[0], model_name=info[1], model_cls=info[2], parameter_grid=info[3],
+                                              categotrical_to_onehot=info[5])
         with open(info[4], "w") as f:
             json.dump(results, f)
 
@@ -174,7 +174,7 @@ if __name__ == "__main__":
     ]
 
     for info in run_info:
-        results = run_test(datasets_names=info[0], model_name=info[1], model_cls=info[2], parameter_grid=info[3],
-                           categotrical_to_onehot=info[5])
+        results = run_test_for_sklearn_models(datasets_names=info[0], model_name=info[1], model_cls=info[2], parameter_grid=info[3],
+                                              categotrical_to_onehot=info[5])
         with open(info[4], "w") as f:
             json.dump(results, f)

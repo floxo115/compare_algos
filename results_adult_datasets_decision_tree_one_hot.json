@@ -1,1 +1,17 @@
-[{"model_cls": "DecisionTreeClassifier", "dataset": "adult", "is_one_hot": true, "best_params": {"criterion": "entropy", "max_depth": 10, "min_samples_split": 2, "min_samples_leaf": 4, "max_features": null, "ccp_alpha": 0.0}, "test_score": 0.82339293025795, "val_score": 0.8315588315588316}]
+[
+  {
+    "model_cls": "DecisionTreeClassifier",
+    "dataset": "adult",
+    "is_one_hot": true,
+    "best_params": {
+      "criterion": "entropy",
+      "max_depth": 10,
+      "min_samples_split": 2,
+      "min_samples_leaf": 4,
+      "max_features": null,
+      "ccp_alpha": 0.0
+    },
+    "test_score": 0.82339293025795,
+    "val_score": 0.8315588315588316
+  }
+]
