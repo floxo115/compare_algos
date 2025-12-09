@@ -1,1 +1,0 @@
-[{"model_cls": "DecisionTreeClassifier", "dataset": "adult", "is_one_hot": false, "best_params": {"criterion": "gini", "max_depth": 10, "min_samples_split": 5, "min_samples_leaf": 1, "max_features": "log2", "ccp_alpha": 0.0}, "test_score": 0.8263955234065784, "val_score": 0.8308763308763308}]
