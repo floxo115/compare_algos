@@ -218,15 +218,24 @@ def get_adult_ds():
     data_sets = list(Counter([f.stem.split("_")[0] for f in new_dataset_path.glob("adult*.csv")]).keys())
     return data_sets
 
+def get_bank_ds():
+    data_sets = list(Counter([f.stem.split("_")[0] for f in new_dataset_path.glob("bank*.csv")]).keys())
+    return data_sets
+
+def get_vote_ds():
+    data_sets = list(Counter([f.stem.split("_")[0] for f in new_dataset_path.glob("vote*.csv")]).keys())
+    return data_sets
+
 
 datasets = []
-# datasets.extend(get_artificial_ds())
-datasets.extend(get_adult_ds())
-
+#datasets.extend(get_artificial_ds())
+#datasets.extend(get_adult_ds())
+#datasets.extend(get_bank_ds())
+datasets.extend(get_vote_ds())
 print(datasets)
 results = []
 for ds in datasets:
-    res = run_pc_test("pc", 0.01, ds, depth=3)
+    res = run_pc_test("pc", 0.0001, ds, depth=10)
     print(res)
     results.extend(res)
 
@@ -235,4 +244,4 @@ for ds in datasets:
     print(res)
     results.extend(res)
 
-json.dump(results, open("probabilistic_circuits_tests.json", "w"))
+json.dump(results, open("results_probabilistic_circuits_tests.json", "w"))

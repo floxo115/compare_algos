@@ -95,9 +95,63 @@ def create_adult_dataset():
     val_df.to_csv(new_dataset_path.joinpath(f"adult_val_one_hot.csv"), index_label="idx")
     test_df.to_csv(new_dataset_path.joinpath(f"adult_test_one_hot.csv"), index_label="idx")
 
+def create_bank_dataset():
+    df = pd.read_csv(dataset_path.joinpath("bank.csv"))
+
+    df["age"] = pd.qcut(df["age"], q=10, labels=False, duplicates="drop")
+    df["balance"] = pd.qcut(df["balance"], q=10, labels=False, duplicates="drop")
+    df["day"] = pd.qcut(df["day"], q=10, labels=False, duplicates="drop")
+    df["duration"] = pd.qcut(df["duration"], q=10, labels=False, duplicates="drop")
+    df["campaign"] = pd.qcut(df["campaign"], q=10, labels=False, duplicates="drop")
+    df["pdays"] = pd.qcut(df["pdays"], q=10, labels=False, duplicates="drop")
+    df["previous"] = pd.qcut(df["previous"], q=10, labels=False, duplicates="drop")
+    df = df.apply(lambda s: s.astype('category').cat.codes)
+    df_with_dummies =  pd.get_dummies(df, drop_first=True)
+
+    (df.max()+1).to_csv(new_dataset_path.joinpath(f"bank_num_cats.csv"), index=False, header=False)
+
+
+    train_df, val_df = model_selection.train_test_split(df, train_size=0.7, random_state=SEED)
+    val_df, test_df = model_selection.train_test_split(val_df, train_size=0.5, random_state=SEED)
+    train_df.to_csv(new_dataset_path.joinpath(f"bank_train.csv"), index_label="idx")
+    val_df.to_csv(new_dataset_path.joinpath(f"bank_val.csv"), index_label="idx")
+    test_df.to_csv(new_dataset_path.joinpath(f"bank_test.csv"), index_label="idx")
+
+    train_df, val_df = model_selection.train_test_split(df_with_dummies, train_size=0.7, random_state=SEED)
+    val_df, test_df = model_selection.train_test_split(val_df, train_size=0.5, random_state=SEED)
+    train_df.to_csv(new_dataset_path.joinpath(f"bank_train_one_hot.csv"), index_label="idx")
+    val_df.to_csv(new_dataset_path.joinpath(f"bank_val_one_hot.csv"), index_label="idx")
+    test_df.to_csv(new_dataset_path.joinpath(f"bank_test_one_hot.csv"), index_label="idx")
+
+def create_vote_dataset():
+    df = pd.read_csv(dataset_path.joinpath("vote.csv"))
+    df = df.fillna("null")
+    df = df.apply(lambda s: s.astype('category').cat.codes)
+
+    (df.max()+1).to_csv(new_dataset_path.joinpath(f"vote_num_cats.csv"), index=False, header=False)
+
+    train_df, val_df = model_selection.train_test_split(df, train_size=0.7, random_state=SEED)
+    val_df, test_df = model_selection.train_test_split(val_df, train_size=0.5, random_state=SEED)
+    train_df.to_csv(new_dataset_path.joinpath(f"vote_train.csv"), index_label="idx")
+    val_df.to_csv(new_dataset_path.joinpath(f"vote_val.csv"), index_label="idx")
+    test_df.to_csv(new_dataset_path.joinpath(f"vote_test.csv"), index_label="idx")
+
+    df_with_dummies =  pd.get_dummies(df, drop_first=True)
+
+    train_df, val_df = model_selection.train_test_split(df_with_dummies, train_size=0.7, random_state=SEED)
+    val_df, test_df = model_selection.train_test_split(val_df, train_size=0.5, random_state=SEED)
+    train_df.to_csv(new_dataset_path.joinpath(f"vote_train_one_hot.csv"), index_label="idx")
+    val_df.to_csv(new_dataset_path.joinpath(f"vote_val_one_hot.csv"), index_label="idx")
+    test_df.to_csv(new_dataset_path.joinpath(f"vote_test_one_hot.csv"), index_label="idx")
+
+
+
+
 def create_datasets():
     create_artifical_datasets()
     create_adult_dataset()
+    create_bank_dataset()
+    create_vote_dataset()
 
 if __name__ == "__main__":
     create_datasets()
