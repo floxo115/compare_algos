@@ -12,13 +12,13 @@ from pyjuice.queries import conditional
 from torch.utils.data import DataLoader, TensorDataset
 from tqdm import tqdm
 
-config_parser = configparser.ConfigParser()
-config_parser.read("config.ini", encoding="utf-8")
-SEED = config_parser.getint("testing", "seed")
-N_PROCESSES = config_parser.getint("testing", "n_processes")
+from config import config
+from utils import get_artificial_ds, get_adult_ds, get_bank_ds, get_vote_ds
 
-dataset_path = pathlib.Path("./data")
-new_dataset_path = dataset_path.joinpath("datasets_for_comparison")
+SEED = config["seed"]
+N_PROCESSES = config["n_processes"]
+dataset_path = config["dataset_path"]
+new_dataset_path = config["new_dataset_path"]
 
 
 def create_probabilistic_circuit(inp_len, cat_nums, depth):
@@ -65,15 +65,9 @@ def get_test_score(model, val_loader):
         batch = batch[0].to(device)
         truth = batch[:, -1].clone().to(device)
         batch[:, -1] = -100
-        # print(batch.shape)
-        # each known variable is set to False
+
         missing_mask = torch.zeros_like(batch, dtype=torch.bool).to(device)
         missing_mask[:, -1] = 1
-        # print(missing_mask)
-        # print(missing_mask.shape)
-        # print(batch.shape)
-        # print(batch)
-        # compute P(class| x_1...x_10)
         outputs = conditional(
             model,
             data=batch,
@@ -81,66 +75,12 @@ def get_test_score(model, val_loader):
             target_vars=[n_variables - 1],
         )
 
-        # get class with maximum probability
         preds = outputs.argmax(dim=2).flatten()
-        # truth = batch[:, -1]
 
-        # compute correct count accuracy
         acc += (preds == truth).sum().item()
 
-    # compute accuracy
     return acc / n_samples
 
-
-# df = pd.read_csv("./data/datasets_for_comparison/5_train.csv", index_col=0)
-#
-# print(df)
-#
-# device = (
-#     torch.device("cuda:0") if torch.cuda.is_available() else torch.device("cpu")
-# )
-#
-# dnp = df.to_numpy()
-# X= dnp
-# X = torch.tensor(X, dtype=torch.long, device=device)
-#
-# pc = create_probabilistic_circuit(X.shape[1], [2]*X.shape[1], 10)
-#
-# print(pc(X)[:5])
-# train_loader = DataLoader(X, shuffle=True, batch_size=512)
-# print(get_test_score(pc, train_loader))
-#
-# optimizer = CircuitOptimizer(pc, lr=0.1, pseudocount=0.1, method="EM")
-#
-# for epoch in range(1, 1000 + 1):
-#     # t0 = time.time()
-#     #print(epoch)
-#     train_ll = 0.0
-#     for batch in train_loader:
-#         x = batch.to(device)
-#
-#         # Similar to PyTorch optimizers zeroling out the gradients, we zero out the parameter flows
-#         optimizer.zero_grad()
-#
-#         # Forward pass
-#         lls = pc(x)
-#
-#         # Backward pass
-#         lls.mean().backward()
-#
-#         train_ll += lls.mean().detach().cpu().numpy().item()
-#
-#         # Perform a mini-batch EM step
-#         optimizer.step()
-#
-#     # train_ll /= len(train_loader)
-#
-#     # print(
-#     #     f"[Epoch {epoch}/{100}][train LL: {train_ll:.2f}]",
-#     #     end="\r",
-#     # )
-# print(pc(X)[:5])
-# print(get_test_score(pc, train_loader))
 
 def run_pc_test(class_descr, lr, ds_name, depth):
     device = (
@@ -166,31 +106,28 @@ def run_pc_test(class_descr, lr, ds_name, depth):
     best_val_score = float("-inf")
     best_model_state_dict = None
 
-    for epoch in tqdm(range(1, 500 + 1)):
-        # t0 = time.time()
-        # print(epoch)
+    no_increase_since = 0
+    for epoch in tqdm(range(1, 5000 + 1)):
         train_ll = 0.0
         for batch in train_loader:
             x = batch[0].to(device)
-            # Similar to PyTorch optimizers zeroling out the gradients, we zero out the parameter flows
             optimizer.zero_grad()
-
-            # Forward pass
             lls = pc(x)
-
-            # Backward pass
             lls.mean().backward()
 
             train_ll += lls.mean().detach().cpu().numpy().item()
-
-            # Perform a mini-batch EM step
             optimizer.step()
 
         score = get_test_score(pc, val_loader)
-        if score >= best_val_score:
+        if score >= best_val_score + 10e-16:
+            no_increase_since = 0
             best_val_score = score
             best_model_state_dict = pc.state_dict()
             print(f"saving best model at epoch {epoch}, new best score {best_val_score}")
+        else:
+            no_increase_since += 1
+            if no_increase_since >= 200:
+                break
 
     pc.load_state_dict(best_model_state_dict)
     test_score = get_test_score(pc, test_loader)
@@ -207,41 +144,26 @@ def run_pc_test(class_descr, lr, ds_name, depth):
     ]
 
 
-def get_artificial_ds():
-    data_sets = [f.stem.split("_")[0] for f in new_dataset_path.glob("*.csv")]
-
-    all_artifical_dataset_fns = list(Counter([fn for fn in data_sets if re.match(r"\d+", fn)]).keys())
-    return all_artifical_dataset_fns
-
-
-def get_adult_ds():
-    data_sets = list(Counter([f.stem.split("_")[0] for f in new_dataset_path.glob("adult*.csv")]).keys())
-    return data_sets
-
-def get_bank_ds():
-    data_sets = list(Counter([f.stem.split("_")[0] for f in new_dataset_path.glob("bank*.csv")]).keys())
-    return data_sets
-
-def get_vote_ds():
-    data_sets = list(Counter([f.stem.split("_")[0] for f in new_dataset_path.glob("vote*.csv")]).keys())
-    return data_sets
-
-
 datasets = []
-#datasets.extend(get_artificial_ds())
-#datasets.extend(get_adult_ds())
-#datasets.extend(get_bank_ds())
+datasets.extend(get_artificial_ds())
+datasets.extend(get_adult_ds())
+datasets.extend(get_bank_ds())
 datasets.extend(get_vote_ds())
 print(datasets)
 results = []
 for ds in datasets:
-    res = run_pc_test("pc", 0.0001, ds, depth=10)
+    res = run_pc_test("pc linear depth 2", 0.01, ds, depth=2)
     print(res)
     results.extend(res)
 
 for ds in datasets:
-    res = run_pc_test("pc", 0.01, ds, depth=2)
+    res = run_pc_test("pc linear depth 5", 0.01, ds, depth=5)
     print(res)
     results.extend(res)
 
-json.dump(results, open("results_probabilistic_circuits_tests.json", "w"))
+for ds in datasets:
+    res = run_pc_test("pc linear depth 10", 0.01, ds, depth=10)
+    print(res)
+    results.extend(res)
+
+json.dump(results, open("results_probabilistic_circuits_linear_tests.json", "w"))
