@@ -1,0 +1,1 @@
+[{"model_cls": "LogisticRegression", "dataset": "secondary-mushrooms", "is_one_hot": "results_datasets_logistic_regression_one_hot.json", "best_params": {"solver": "lbfgs", "C": 10, "max_iter": 100, "class_weight": null}, "test_score": 0.8729396354109813, "val_score": 0.8725982532751092}]

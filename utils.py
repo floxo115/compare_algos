@@ -23,3 +23,6 @@ def get_bank_ds():
 def get_vote_ds():
     data_sets = list(Counter([f.stem.split("_")[0] for f in new_dataset_path.glob("vote*.csv")]).keys())
     return data_sets
+def get_secondary_mushrooms_ds():
+    data_sets = list(Counter([f.stem.split("_")[0] for f in new_dataset_path.glob("secondary-mushrooms*.csv")]).keys())
+    return data_sets

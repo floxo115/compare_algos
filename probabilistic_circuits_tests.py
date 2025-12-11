@@ -13,7 +13,7 @@ from torch.utils.data import DataLoader, TensorDataset
 from tqdm import tqdm
 
 from config import config
-from utils import get_artificial_ds, get_adult_ds, get_bank_ds, get_vote_ds
+from utils import get_artificial_ds, get_adult_ds, get_bank_ds, get_vote_ds, get_secondary_mushrooms_ds
 
 SEED = config["seed"]
 N_PROCESSES = config["n_processes"]
@@ -36,8 +36,9 @@ def create_probabilistic_circuit(inp_len, cat_nums, depth):
         )
         for i in range(inp_len)
     ]
-    prods = [juice.multiply(*inputs) for _ in range(2)]
-    ns = juice.summate(*prods, num_node_blocks=1)
+
+    prods = [juice.multiply(*inputs) for _ in range(5)]
+    ns = juice.summate(*prods, num_node_blocks=5)
 
     for depth in range(1, depth):
         products = juice.multiply(*inputs)
@@ -70,7 +71,7 @@ def get_test_score(model, val_loader):
         missing_mask[:, -1] = 1
         outputs = conditional(
             model,
-            data=batch,
+            data=batch.to(torch.long),
             missing_mask=missing_mask,
             target_vars=[n_variables - 1],
         )
@@ -91,16 +92,17 @@ def run_pc_test(class_descr, lr, ds_name, depth):
 
     train_data = torch.tensor(pd.read_csv(new_dataset_path.joinpath(f"{ds_name}_train.csv"), index_col=0).to_numpy(),
                               dtype=torch.long)
-    train_loader = DataLoader(TensorDataset(train_data), batch_size=32, shuffle=True)
+    train_loader = DataLoader(TensorDataset(train_data), batch_size=512, shuffle=True)
     val_data = torch.tensor(pd.read_csv(new_dataset_path.joinpath(f"{ds_name}_val.csv"), index_col=0).to_numpy())
-    val_loader = DataLoader(TensorDataset(val_data), batch_size=32, shuffle=False)
+    val_loader = DataLoader(TensorDataset(val_data), batch_size=100000, shuffle=False)
     test_data = torch.tensor(pd.read_csv(new_dataset_path.joinpath(f"{ds_name}_test.csv"), index_col=0).to_numpy())
-    test_loader = DataLoader(TensorDataset(test_data), batch_size=32, shuffle=False)
+    test_loader = DataLoader(TensorDataset(test_data), batch_size=10000, shuffle=False)
 
     num_cat = pd.read_csv(new_dataset_path.joinpath(f"{ds_name}_num_cats.csv"), header=None).to_numpy().flatten()
     print(f"num_cat: {num_cat}")
 
     pc = create_probabilistic_circuit(len(num_cat), num_cat, depth)
+
     optimizer = CircuitOptimizer(pc, lr=lr, method="EM")
 
     best_val_score = float("-inf")
@@ -126,7 +128,7 @@ def run_pc_test(class_descr, lr, ds_name, depth):
             print(f"saving best model at epoch {epoch}, new best score {best_val_score}")
         else:
             no_increase_since += 1
-            if no_increase_since >= 200:
+            if no_increase_since >= 100:
                 break
 
     pc.load_state_dict(best_model_state_dict)
@@ -145,25 +147,26 @@ def run_pc_test(class_descr, lr, ds_name, depth):
 
 
 datasets = []
-datasets.extend(get_artificial_ds())
-datasets.extend(get_adult_ds())
-datasets.extend(get_bank_ds())
-datasets.extend(get_vote_ds())
+# datasets.extend(get_artificial_ds())
+# datasets.extend(get_adult_ds())
+# datasets.extend(get_bank_ds())
+# datasets.extend(get_vote_ds())
+datasets.extend(get_secondary_mushrooms_ds())
 print(datasets)
 results = []
 for ds in datasets:
-    res = run_pc_test("pc linear depth 2", 0.01, ds, depth=2)
+    res = run_pc_test("HCLT w. hidden vars: 13", 0.01, ds, depth=1)
     print(res)
     results.extend(res)
 
 for ds in datasets:
-    res = run_pc_test("pc linear depth 5", 0.01, ds, depth=5)
+    res = run_pc_test("HCLT w. hidden vars: 141", 0.01, ds, depth=30)
     print(res)
     results.extend(res)
 
 for ds in datasets:
-    res = run_pc_test("pc linear depth 10", 0.01, ds, depth=10)
+    res = run_pc_test("HCLT w. hidden vars: 141", 0.1, ds, depth=10)
     print(res)
     results.extend(res)
 
-json.dump(results, open("results_probabilistic_circuits_linear_tests.json", "w"))
+json.dump(results, open("res/results_hclt_13_hidden_vars_all_datasets_tests.json", "w"))

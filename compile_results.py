@@ -5,7 +5,7 @@ from glob import glob
 if __name__ == '__main__':
 
     res_df = pd.DataFrame(columns=["dataset", "model_cls", "one_hot_encoding", "test_score"])
-    result_files = glob('./results_*.json')
+    result_files = glob('res/results_*.json')
     print(result_files)
     for result_file in result_files:
         with open(result_file, "r") as f:

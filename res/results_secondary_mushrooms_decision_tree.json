@@ -1,0 +1,17 @@
+[
+  {
+    "model_cls": "DecisionTreeClassifier",
+    "dataset": "secondary-mushrooms",
+    "is_one_hot": "results_datasets_decision_tree.json",
+    "best_params": {
+      "criterion": "entropy",
+      "max_depth": null,
+      "min_samples_split": 2,
+      "min_samples_leaf": 1,
+      "max_features": null,
+      "ccp_alpha": 0.0
+    },
+    "test_score": 0.9991267328894226,
+    "val_score": 0.9994541484716157
+  }
+]

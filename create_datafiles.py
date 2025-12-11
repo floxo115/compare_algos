@@ -26,8 +26,9 @@ def create_artifical_datasets():
         categorical = df.columns
         categorical_idx = [df.columns.get_loc(cat) for cat in categorical]
         ds_name = all_artifical_dataset_fns[i].stem.strip()
-        for col in categorical:
-            df[col] = df[col].astype("category")
+
+        # for col in categorical:
+        #     df[col] = df[col].astype("category")
 
         df = df.apply(lambda x: x.cat.codes if x.dtype == "category" else x)
 
@@ -106,9 +107,13 @@ def create_bank_dataset():
     df["pdays"] = pd.qcut(df["pdays"], q=10, labels=False, duplicates="drop")
     df["previous"] = pd.qcut(df["previous"], q=10, labels=False, duplicates="drop")
     df = df.apply(lambda s: s.astype('category').cat.codes)
-    df_with_dummies =  pd.get_dummies(df, drop_first=True)
 
     (df.max()+1).to_csv(new_dataset_path.joinpath(f"bank_num_cats.csv"), index=False, header=False)
+
+    for col in df.columns:
+        df[col] = df[col].astype("category")
+
+    df_with_dummies =  pd.get_dummies(df, drop_first=True)
 
 
     train_df, val_df = model_selection.train_test_split(df, train_size=0.7, random_state=SEED)
@@ -130,6 +135,10 @@ def create_vote_dataset():
 
     (df.max()+1).to_csv(new_dataset_path.joinpath(f"vote_num_cats.csv"), index=False, header=False)
 
+    for col in df.columns:
+        df[col] = df[col].astype("category")
+
+
     train_df, val_df = model_selection.train_test_split(df, train_size=0.7, random_state=SEED)
     val_df, test_df = model_selection.train_test_split(val_df, train_size=0.5, random_state=SEED)
     train_df.to_csv(new_dataset_path.joinpath(f"vote_train.csv"), index_label="idx")
@@ -144,7 +153,38 @@ def create_vote_dataset():
     val_df.to_csv(new_dataset_path.joinpath(f"vote_val_one_hot.csv"), index_label="idx")
     test_df.to_csv(new_dataset_path.joinpath(f"vote_test_one_hot.csv"), index_label="idx")
 
+def create_secondary_mushrooms_dataset():
+    df = pd.read_csv(dataset_path.joinpath("secondary_mushrooms_with_semicolon.csv"))
+    df = df.fillna("null")
 
+    df["cap-diameter"] = pd.qcut(df["cap-diameter"], q=10, duplicates="drop")
+    df["stem-height"] = pd.qcut(df["stem-height"], q=10, duplicates="drop")
+    df["stem-width"] = pd.qcut(df["stem-width"], q=10, duplicates="drop")
+
+    class_series = df.pop("class")
+    df.insert(len(df.columns), "class", class_series)
+
+    df = df.apply(lambda s: s.astype('category').cat.codes)
+
+    (df.max()+1).to_csv(new_dataset_path.joinpath(f"secondary-mushrooms_num_cats.csv"), index=False, header=False)
+
+    for col in df.columns:
+        df[col] = df[col].astype("category")
+
+
+    train_df, val_df = model_selection.train_test_split(df, train_size=0.7, random_state=SEED)
+    val_df, test_df = model_selection.train_test_split(val_df, train_size=0.5, random_state=SEED)
+    train_df.to_csv(new_dataset_path.joinpath(f"secondary-mushrooms_train.csv"), index_label="idx")
+    val_df.to_csv(new_dataset_path.joinpath(f"secondary-mushrooms_val.csv"), index_label="idx")
+    test_df.to_csv(new_dataset_path.joinpath(f"secondary-mushrooms_test.csv"), index_label="idx")
+
+    df_with_dummies =  pd.get_dummies(df, drop_first=True)
+
+    train_df, val_df = model_selection.train_test_split(df_with_dummies, train_size=0.7, random_state=SEED)
+    val_df, test_df = model_selection.train_test_split(val_df, train_size=0.5, random_state=SEED)
+    train_df.to_csv(new_dataset_path.joinpath(f"secondary-mushrooms_train_one_hot.csv"), index_label="idx")
+    val_df.to_csv(new_dataset_path.joinpath(f"secondary-mushrooms_val_one_hot.csv"), index_label="idx")
+    test_df.to_csv(new_dataset_path.joinpath(f"secondary-mushrooms_test_one_hot.csv"), index_label="idx")
 
 
 def create_datasets():
@@ -152,6 +192,7 @@ def create_datasets():
     create_adult_dataset()
     create_bank_dataset()
     create_vote_dataset()
+    create_secondary_mushrooms_dataset()
 
 if __name__ == "__main__":
     create_datasets()

@@ -1,0 +1,554 @@
+[
+  {
+    "model_cls": "pc linear depth 2",
+    "dataset": "24",
+    "is_one_hot": false,
+    "lr": 0.01,
+    "test_score": 0.8766233766233766,
+    "val_score": 0.9155844155844156
+  },
+  {
+    "model_cls": "pc linear depth 2",
+    "dataset": "69",
+    "is_one_hot": false,
+    "lr": 0.01,
+    "test_score": 0.8961038961038961,
+    "val_score": 0.9155844155844156
+  },
+  {
+    "model_cls": "pc linear depth 2",
+    "dataset": "118",
+    "is_one_hot": false,
+    "lr": 0.01,
+    "test_score": 0.9155844155844156,
+    "val_score": 0.961038961038961
+  },
+  {
+    "model_cls": "pc linear depth 2",
+    "dataset": "82",
+    "is_one_hot": false,
+    "lr": 0.01,
+    "test_score": 0.9935064935064936,
+    "val_score": 0.9935064935064936
+  },
+  {
+    "model_cls": "pc linear depth 2",
+    "dataset": "36",
+    "is_one_hot": false,
+    "lr": 0.01,
+    "test_score": 0.8376623376623377,
+    "val_score": 0.8636363636363636
+  },
+  {
+    "model_cls": "pc linear depth 2",
+    "dataset": "5",
+    "is_one_hot": false,
+    "lr": 0.01,
+    "test_score": 0.9545454545454546,
+    "val_score": 0.948051948051948
+  },
+  {
+    "model_cls": "pc linear depth 2",
+    "dataset": "70",
+    "is_one_hot": false,
+    "lr": 0.01,
+    "test_score": 0.8311688311688312,
+    "val_score": 0.8766233766233766
+  },
+  {
+    "model_cls": "pc linear depth 2",
+    "dataset": "85",
+    "is_one_hot": false,
+    "lr": 0.01,
+    "test_score": 0.9675324675324676,
+    "val_score": 0.9935064935064936
+  },
+  {
+    "model_cls": "pc linear depth 2",
+    "dataset": "89",
+    "is_one_hot": false,
+    "lr": 0.01,
+    "test_score": 0.8506493506493507,
+    "val_score": 0.8831168831168831
+  },
+  {
+    "model_cls": "pc linear depth 2",
+    "dataset": "60",
+    "is_one_hot": false,
+    "lr": 0.01,
+    "test_score": 0.8506493506493507,
+    "val_score": 0.8961038961038961
+  },
+  {
+    "model_cls": "pc linear depth 2",
+    "dataset": "19",
+    "is_one_hot": false,
+    "lr": 0.01,
+    "test_score": 0.9935064935064936,
+    "val_score": 1.0
+  },
+  {
+    "model_cls": "pc linear depth 2",
+    "dataset": "107",
+    "is_one_hot": false,
+    "lr": 0.01,
+    "test_score": 0.8701298701298701,
+    "val_score": 0.8961038961038961
+  },
+  {
+    "model_cls": "pc linear depth 2",
+    "dataset": "112",
+    "is_one_hot": false,
+    "lr": 0.01,
+    "test_score": 0.9285714285714286,
+    "val_score": 0.9415584415584416
+  },
+  {
+    "model_cls": "pc linear depth 2",
+    "dataset": "57",
+    "is_one_hot": false,
+    "lr": 0.01,
+    "test_score": 0.9545454545454546,
+    "val_score": 0.9675324675324676
+  },
+  {
+    "model_cls": "pc linear depth 2",
+    "dataset": "68",
+    "is_one_hot": false,
+    "lr": 0.01,
+    "test_score": 0.8961038961038961,
+    "val_score": 0.8506493506493507
+  },
+  {
+    "model_cls": "pc linear depth 2",
+    "dataset": "81",
+    "is_one_hot": false,
+    "lr": 0.01,
+    "test_score": 0.8571428571428571,
+    "val_score": 0.9090909090909091
+  },
+  {
+    "model_cls": "pc linear depth 2",
+    "dataset": "53",
+    "is_one_hot": false,
+    "lr": 0.01,
+    "test_score": 0.9805194805194806,
+    "val_score": 0.987012987012987
+  },
+  {
+    "model_cls": "pc linear depth 2",
+    "dataset": "65",
+    "is_one_hot": false,
+    "lr": 0.01,
+    "test_score": 0.9415584415584416,
+    "val_score": 0.948051948051948
+  },
+  {
+    "model_cls": "pc linear depth 2",
+    "dataset": "44",
+    "is_one_hot": false,
+    "lr": 0.01,
+    "test_score": 0.948051948051948,
+    "val_score": 0.9545454545454546
+  },
+  {
+    "model_cls": "pc linear depth 2",
+    "dataset": "16",
+    "is_one_hot": false,
+    "lr": 0.01,
+    "test_score": 0.9025974025974026,
+    "val_score": 0.948051948051948
+  },
+  {
+    "model_cls": "pc linear depth 2",
+    "dataset": "adult",
+    "is_one_hot": false,
+    "lr": 0.01,
+    "test_score": 0.8169782994404258,
+    "val_score": 0.8245973245973246
+  },
+  {
+    "model_cls": "pc linear depth 2",
+    "dataset": "bank",
+    "is_one_hot": false,
+    "lr": 0.01,
+    "test_score": 0.8815983485697434,
+    "val_score": 0.8849896785608965
+  },
+  {
+    "model_cls": "pc linear depth 2",
+    "dataset": "vote",
+    "is_one_hot": false,
+    "lr": 0.01,
+    "test_score": 0.9242424242424242,
+    "val_score": 0.9538461538461539
+  },
+  {
+    "model_cls": "pc linear depth 5",
+    "dataset": "24",
+    "is_one_hot": false,
+    "lr": 0.01,
+    "test_score": 0.8766233766233766,
+    "val_score": 0.9155844155844156
+  },
+  {
+    "model_cls": "pc linear depth 5",
+    "dataset": "69",
+    "is_one_hot": false,
+    "lr": 0.01,
+    "test_score": 0.8896103896103896,
+    "val_score": 0.9155844155844156
+  },
+  {
+    "model_cls": "pc linear depth 5",
+    "dataset": "118",
+    "is_one_hot": false,
+    "lr": 0.01,
+    "test_score": 0.9285714285714286,
+    "val_score": 0.9675324675324676
+  },
+  {
+    "model_cls": "pc linear depth 5",
+    "dataset": "82",
+    "is_one_hot": false,
+    "lr": 0.01,
+    "test_score": 0.987012987012987,
+    "val_score": 0.974025974025974
+  },
+  {
+    "model_cls": "pc linear depth 5",
+    "dataset": "36",
+    "is_one_hot": false,
+    "lr": 0.01,
+    "test_score": 0.8246753246753247,
+    "val_score": 0.8571428571428571
+  },
+  {
+    "model_cls": "pc linear depth 5",
+    "dataset": "5",
+    "is_one_hot": false,
+    "lr": 0.01,
+    "test_score": 0.961038961038961,
+    "val_score": 0.9545454545454546
+  },
+  {
+    "model_cls": "pc linear depth 5",
+    "dataset": "70",
+    "is_one_hot": false,
+    "lr": 0.01,
+    "test_score": 0.8571428571428571,
+    "val_score": 0.8896103896103896
+  },
+  {
+    "model_cls": "pc linear depth 5",
+    "dataset": "85",
+    "is_one_hot": false,
+    "lr": 0.01,
+    "test_score": 0.9675324675324676,
+    "val_score": 0.987012987012987
+  },
+  {
+    "model_cls": "pc linear depth 5",
+    "dataset": "89",
+    "is_one_hot": false,
+    "lr": 0.01,
+    "test_score": 0.7922077922077922,
+    "val_score": 0.8766233766233766
+  },
+  {
+    "model_cls": "pc linear depth 5",
+    "dataset": "60",
+    "is_one_hot": false,
+    "lr": 0.01,
+    "test_score": 0.8506493506493507,
+    "val_score": 0.8961038961038961
+  },
+  {
+    "model_cls": "pc linear depth 5",
+    "dataset": "19",
+    "is_one_hot": false,
+    "lr": 0.01,
+    "test_score": 0.987012987012987,
+    "val_score": 1.0
+  },
+  {
+    "model_cls": "pc linear depth 5",
+    "dataset": "107",
+    "is_one_hot": false,
+    "lr": 0.01,
+    "test_score": 0.8961038961038961,
+    "val_score": 0.922077922077922
+  },
+  {
+    "model_cls": "pc linear depth 5",
+    "dataset": "112",
+    "is_one_hot": false,
+    "lr": 0.01,
+    "test_score": 0.9285714285714286,
+    "val_score": 0.935064935064935
+  },
+  {
+    "model_cls": "pc linear depth 5",
+    "dataset": "57",
+    "is_one_hot": false,
+    "lr": 0.01,
+    "test_score": 0.948051948051948,
+    "val_score": 0.9675324675324676
+  },
+  {
+    "model_cls": "pc linear depth 5",
+    "dataset": "68",
+    "is_one_hot": false,
+    "lr": 0.01,
+    "test_score": 0.9025974025974026,
+    "val_score": 0.8441558441558441
+  },
+  {
+    "model_cls": "pc linear depth 5",
+    "dataset": "81",
+    "is_one_hot": false,
+    "lr": 0.01,
+    "test_score": 0.8441558441558441,
+    "val_score": 0.9155844155844156
+  },
+  {
+    "model_cls": "pc linear depth 5",
+    "dataset": "53",
+    "is_one_hot": false,
+    "lr": 0.01,
+    "test_score": 0.9805194805194806,
+    "val_score": 0.987012987012987
+  },
+  {
+    "model_cls": "pc linear depth 5",
+    "dataset": "65",
+    "is_one_hot": false,
+    "lr": 0.01,
+    "test_score": 0.9285714285714286,
+    "val_score": 0.948051948051948
+  },
+  {
+    "model_cls": "pc linear depth 5",
+    "dataset": "44",
+    "is_one_hot": false,
+    "lr": 0.01,
+    "test_score": 0.948051948051948,
+    "val_score": 0.9545454545454546
+  },
+  {
+    "model_cls": "pc linear depth 5",
+    "dataset": "16",
+    "is_one_hot": false,
+    "lr": 0.01,
+    "test_score": 0.9090909090909091,
+    "val_score": 0.9415584415584416
+  },
+  {
+    "model_cls": "pc linear depth 5",
+    "dataset": "adult",
+    "is_one_hot": false,
+    "lr": 0.01,
+    "test_score": 0.819298485055275,
+    "val_score": 0.8222768222768223
+  },
+  {
+    "model_cls": "pc linear depth 5",
+    "dataset": "bank",
+    "is_one_hot": false,
+    "lr": 0.01,
+    "test_score": 0.8815983485697434,
+    "val_score": 0.8851371276909467
+  },
+  {
+    "model_cls": "pc linear depth 5",
+    "dataset": "vote",
+    "is_one_hot": false,
+    "lr": 0.01,
+    "test_score": 0.9242424242424242,
+    "val_score": 0.9538461538461539
+  },
+  {
+    "model_cls": "pc linear depth 10",
+    "dataset": "24",
+    "is_one_hot": false,
+    "lr": 0.01,
+    "test_score": 0.8636363636363636,
+    "val_score": 0.922077922077922
+  },
+  {
+    "model_cls": "pc linear depth 10",
+    "dataset": "69",
+    "is_one_hot": false,
+    "lr": 0.01,
+    "test_score": 0.8896103896103896,
+    "val_score": 0.9155844155844156
+  },
+  {
+    "model_cls": "pc linear depth 10",
+    "dataset": "118",
+    "is_one_hot": false,
+    "lr": 0.01,
+    "test_score": 0.9545454545454546,
+    "val_score": 0.9675324675324676
+  },
+  {
+    "model_cls": "pc linear depth 10",
+    "dataset": "82",
+    "is_one_hot": false,
+    "lr": 0.01,
+    "test_score": 0.9935064935064936,
+    "val_score": 1.0
+  },
+  {
+    "model_cls": "pc linear depth 10",
+    "dataset": "36",
+    "is_one_hot": false,
+    "lr": 0.01,
+    "test_score": 0.8441558441558441,
+    "val_score": 0.8571428571428571
+  },
+  {
+    "model_cls": "pc linear depth 10",
+    "dataset": "5",
+    "is_one_hot": false,
+    "lr": 0.01,
+    "test_score": 0.9675324675324676,
+    "val_score": 0.948051948051948
+  },
+  {
+    "model_cls": "pc linear depth 10",
+    "dataset": "70",
+    "is_one_hot": false,
+    "lr": 0.01,
+    "test_score": 0.8766233766233766,
+    "val_score": 0.8961038961038961
+  },
+  {
+    "model_cls": "pc linear depth 10",
+    "dataset": "85",
+    "is_one_hot": false,
+    "lr": 0.01,
+    "test_score": 0.961038961038961,
+    "val_score": 0.9935064935064936
+  },
+  {
+    "model_cls": "pc linear depth 10",
+    "dataset": "89",
+    "is_one_hot": false,
+    "lr": 0.01,
+    "test_score": 0.8181818181818182,
+    "val_score": 0.8766233766233766
+  },
+  {
+    "model_cls": "pc linear depth 10",
+    "dataset": "60",
+    "is_one_hot": false,
+    "lr": 0.01,
+    "test_score": 0.8701298701298701,
+    "val_score": 0.8961038961038961
+  },
+  {
+    "model_cls": "pc linear depth 10",
+    "dataset": "19",
+    "is_one_hot": false,
+    "lr": 0.01,
+    "test_score": 0.9935064935064936,
+    "val_score": 0.9935064935064936
+  },
+  {
+    "model_cls": "pc linear depth 10",
+    "dataset": "107",
+    "is_one_hot": false,
+    "lr": 0.01,
+    "test_score": 0.8701298701298701,
+    "val_score": 0.922077922077922
+  },
+  {
+    "model_cls": "pc linear depth 10",
+    "dataset": "112",
+    "is_one_hot": false,
+    "lr": 0.01,
+    "test_score": 0.9415584415584416,
+    "val_score": 0.9415584415584416
+  },
+  {
+    "model_cls": "pc linear depth 10",
+    "dataset": "57",
+    "is_one_hot": false,
+    "lr": 0.01,
+    "test_score": 0.9415584415584416,
+    "val_score": 0.974025974025974
+  },
+  {
+    "model_cls": "pc linear depth 10",
+    "dataset": "68",
+    "is_one_hot": false,
+    "lr": 0.01,
+    "test_score": 0.9090909090909091,
+    "val_score": 0.8571428571428571
+  },
+  {
+    "model_cls": "pc linear depth 10",
+    "dataset": "81",
+    "is_one_hot": false,
+    "lr": 0.01,
+    "test_score": 0.8571428571428571,
+    "val_score": 0.9090909090909091
+  },
+  {
+    "model_cls": "pc linear depth 10",
+    "dataset": "53",
+    "is_one_hot": false,
+    "lr": 0.01,
+    "test_score": 0.9805194805194806,
+    "val_score": 0.987012987012987
+  },
+  {
+    "model_cls": "pc linear depth 10",
+    "dataset": "65",
+    "is_one_hot": false,
+    "lr": 0.01,
+    "test_score": 0.9545454545454546,
+    "val_score": 0.948051948051948
+  },
+  {
+    "model_cls": "pc linear depth 10",
+    "dataset": "44",
+    "is_one_hot": false,
+    "lr": 0.01,
+    "test_score": 0.961038961038961,
+    "val_score": 0.9675324675324676
+  },
+  {
+    "model_cls": "pc linear depth 10",
+    "dataset": "16",
+    "is_one_hot": false,
+    "lr": 0.01,
+    "test_score": 0.9155844155844156,
+    "val_score": 0.9415584415584416
+  },
+  {
+    "model_cls": "pc linear depth 10",
+    "dataset": "adult",
+    "is_one_hot": false,
+    "lr": 0.01,
+    "test_score": 0.8165688549201583,
+    "val_score": 0.8228228228228228
+  },
+  {
+    "model_cls": "pc linear depth 10",
+    "dataset": "bank",
+    "is_one_hot": false,
+    "lr": 0.01,
+    "test_score": 0.8815983485697434,
+    "val_score": 0.8839575346505456
+  },
+  {
+    "model_cls": "pc linear depth 10",
+    "dataset": "vote",
+    "is_one_hot": false,
+    "lr": 0.01,
+    "test_score": 0.9090909090909091,
+    "val_score": 0.9538461538461539
+  }
+]
