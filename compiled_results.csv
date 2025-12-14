@@ -1,233 +1,257 @@
 dataset,model_cls,one_hot_encoding,test_score
 107,DecisionTreeClassifier,False,0.9935064935064936
-107,HCLT w. hidden vars: 13,False,0.7272727272727273
-107,HCLT w. hidden vars: 141,False,0.7532467532467533
 107,KNeighborsClassifier,False,0.9155844155844156
 107,LogisticRegression,False,0.7337662337662337
+107,RSPN depth 1,False,0.9415584415584416
+107,RSPN depth 10,False,0.8831168831168831
+107,RSPN depth 5,False,0.8831168831168831
 107,RandomForestClassifier,False,1.0
 107,pc linear depth 10,False,0.8701298701298701
 107,pc linear depth 2,False,0.8701298701298701
 107,pc linear depth 5,False,0.8961038961038961
 112,DecisionTreeClassifier,False,0.987012987012987
-112,HCLT w. hidden vars: 13,False,0.9155844155844156
-112,HCLT w. hidden vars: 141,False,0.9155844155844156
 112,KNeighborsClassifier,False,0.9805194805194806
 112,LogisticRegression,False,0.8311688311688312
+112,RSPN depth 1,False,0.9805194805194806
+112,RSPN depth 10,False,0.9415584415584416
+112,RSPN depth 5,False,0.9415584415584416
 112,RandomForestClassifier,False,0.974025974025974
 112,pc linear depth 10,False,0.9415584415584416
 112,pc linear depth 2,False,0.9285714285714286
 112,pc linear depth 5,False,0.9285714285714286
 118,DecisionTreeClassifier,False,0.9675324675324676
-118,HCLT w. hidden vars: 13,False,0.8961038961038961
-118,HCLT w. hidden vars: 141,False,0.9155844155844156
 118,KNeighborsClassifier,False,0.974025974025974
 118,LogisticRegression,False,0.8181818181818182
+118,RSPN depth 1,False,0.9935064935064936
+118,RSPN depth 10,False,0.987012987012987
+118,RSPN depth 5,False,0.987012987012987
 118,RandomForestClassifier,False,0.987012987012987
 118,pc linear depth 10,False,0.9545454545454546
 118,pc linear depth 2,False,0.9155844155844156
 118,pc linear depth 5,False,0.9285714285714286
 16,DecisionTreeClassifier,False,1.0
-16,HCLT w. hidden vars: 13,False,0.9090909090909091
-16,HCLT w. hidden vars: 141,False,0.948051948051948
 16,KNeighborsClassifier,False,0.9675324675324676
 16,LogisticRegression,False,0.8441558441558441
+16,RSPN depth 1,False,0.961038961038961
+16,RSPN depth 10,False,0.935064935064935
+16,RSPN depth 5,False,0.935064935064935
 16,RandomForestClassifier,False,0.987012987012987
 16,pc linear depth 10,False,0.9155844155844156
 16,pc linear depth 2,False,0.9025974025974026
 16,pc linear depth 5,False,0.9090909090909091
 19,DecisionTreeClassifier,False,1.0
-19,HCLT w. hidden vars: 13,False,0.7597402597402597
-19,HCLT w. hidden vars: 141,False,0.7987012987012987
 19,KNeighborsClassifier,False,0.9935064935064936
 19,LogisticRegression,False,0.7662337662337663
+19,RSPN depth 1,False,0.9935064935064936
+19,RSPN depth 10,False,1.0
+19,RSPN depth 5,False,1.0
 19,RandomForestClassifier,False,1.0
 19,pc linear depth 10,False,0.9935064935064936
 19,pc linear depth 2,False,0.9935064935064936
 19,pc linear depth 5,False,0.987012987012987
 24,DecisionTreeClassifier,False,0.9675324675324676
-24,HCLT w. hidden vars: 13,False,0.7012987012987013
-24,HCLT w. hidden vars: 141,False,0.6233766233766234
 24,KNeighborsClassifier,False,0.9285714285714286
 24,LogisticRegression,False,0.6233766233766234
+24,RSPN depth 1,False,0.9805194805194806
+24,RSPN depth 10,False,0.961038961038961
+24,RSPN depth 5,False,0.961038961038961
 24,RandomForestClassifier,False,0.9935064935064936
 24,pc linear depth 10,False,0.8636363636363636
 24,pc linear depth 2,False,0.8766233766233766
 24,pc linear depth 5,False,0.8766233766233766
 36,DecisionTreeClassifier,False,0.8701298701298701
-36,HCLT w. hidden vars: 13,False,0.8441558441558441
-36,HCLT w. hidden vars: 141,False,0.7337662337662337
 36,KNeighborsClassifier,False,0.9090909090909091
 36,LogisticRegression,False,0.7597402597402597
+36,RSPN depth 1,False,0.9025974025974026
+36,RSPN depth 10,False,0.8636363636363636
+36,RSPN depth 5,False,0.8636363636363636
 36,RandomForestClassifier,False,0.8636363636363636
 36,pc linear depth 10,False,0.8441558441558441
 36,pc linear depth 2,False,0.8376623376623377
 36,pc linear depth 5,False,0.8246753246753247
 44,DecisionTreeClassifier,False,1.0
-44,HCLT w. hidden vars: 13,False,0.8766233766233766
-44,HCLT w. hidden vars: 141,False,0.987012987012987
 44,KNeighborsClassifier,False,0.9675324675324676
 44,LogisticRegression,False,0.8441558441558441
+44,RSPN depth 1,False,1.0
+44,RSPN depth 10,False,0.9935064935064936
+44,RSPN depth 5,False,0.9935064935064936
 44,RandomForestClassifier,False,1.0
 44,pc linear depth 10,False,0.961038961038961
 44,pc linear depth 2,False,0.948051948051948
 44,pc linear depth 5,False,0.948051948051948
 5,DecisionTreeClassifier,False,1.0
-5,HCLT w. hidden vars: 13,False,0.9805194805194806
-5,HCLT w. hidden vars: 141,False,0.974025974025974
 5,KNeighborsClassifier,False,0.9935064935064936
 5,LogisticRegression,False,0.7597402597402597
+5,RSPN depth 1,False,0.987012987012987
+5,RSPN depth 10,False,0.987012987012987
+5,RSPN depth 5,False,0.987012987012987
 5,RandomForestClassifier,False,1.0
 5,pc linear depth 10,False,0.9675324675324676
 5,pc linear depth 2,False,0.9545454545454546
 5,pc linear depth 5,False,0.961038961038961
 53,DecisionTreeClassifier,False,0.987012987012987
-53,HCLT w. hidden vars: 13,False,0.9805194805194806
-53,HCLT w. hidden vars: 141,False,0.8571428571428571
 53,KNeighborsClassifier,False,0.987012987012987
 53,LogisticRegression,False,0.9805194805194806
+53,RSPN depth 1,False,0.987012987012987
+53,RSPN depth 10,False,0.9805194805194806
+53,RSPN depth 5,False,0.9805194805194806
 53,RandomForestClassifier,False,1.0
 53,pc linear depth 10,False,0.9805194805194806
 53,pc linear depth 2,False,0.9805194805194806
 53,pc linear depth 5,False,0.9805194805194806
 57,DecisionTreeClassifier,False,0.9675324675324676
-57,HCLT w. hidden vars: 13,False,0.9415584415584416
-57,HCLT w. hidden vars: 141,False,0.961038961038961
 57,KNeighborsClassifier,False,0.9675324675324676
 57,LogisticRegression,False,0.8636363636363636
+57,RSPN depth 1,False,0.961038961038961
+57,RSPN depth 10,False,0.987012987012987
+57,RSPN depth 5,False,0.987012987012987
 57,RandomForestClassifier,False,0.9675324675324676
 57,pc linear depth 10,False,0.9415584415584416
 57,pc linear depth 2,False,0.9545454545454546
 57,pc linear depth 5,False,0.948051948051948
 60,DecisionTreeClassifier,False,0.9675324675324676
-60,HCLT w. hidden vars: 13,False,0.8766233766233766
-60,HCLT w. hidden vars: 141,False,0.8701298701298701
 60,KNeighborsClassifier,False,0.9675324675324676
 60,LogisticRegression,False,0.8116883116883117
+60,RSPN depth 1,False,0.974025974025974
+60,RSPN depth 10,False,0.9545454545454546
+60,RSPN depth 5,False,0.9545454545454546
 60,RandomForestClassifier,False,0.9805194805194806
 60,pc linear depth 10,False,0.8701298701298701
 60,pc linear depth 2,False,0.8506493506493507
 60,pc linear depth 5,False,0.8506493506493507
 65,DecisionTreeClassifier,False,1.0
-65,HCLT w. hidden vars: 13,False,0.8441558441558441
-65,HCLT w. hidden vars: 141,False,0.7272727272727273
 65,KNeighborsClassifier,False,0.9545454545454546
 65,LogisticRegression,False,0.8181818181818182
+65,RSPN depth 1,False,0.9935064935064936
+65,RSPN depth 10,False,0.9935064935064936
+65,RSPN depth 5,False,0.9935064935064936
 65,RandomForestClassifier,False,0.9805194805194806
 65,pc linear depth 10,False,0.9545454545454546
 65,pc linear depth 2,False,0.9415584415584416
 65,pc linear depth 5,False,0.9285714285714286
 68,DecisionTreeClassifier,False,0.9675324675324676
-68,HCLT w. hidden vars: 13,False,0.6753246753246753
-68,HCLT w. hidden vars: 141,False,0.7402597402597403
 68,KNeighborsClassifier,False,0.948051948051948
 68,LogisticRegression,False,0.6688311688311688
+68,RSPN depth 1,False,0.974025974025974
+68,RSPN depth 10,False,0.9805194805194806
+68,RSPN depth 5,False,0.9805194805194806
 68,RandomForestClassifier,False,0.9675324675324676
 68,pc linear depth 10,False,0.9090909090909091
 68,pc linear depth 2,False,0.8961038961038961
 68,pc linear depth 5,False,0.9025974025974026
 69,DecisionTreeClassifier,False,0.974025974025974
-69,HCLT w. hidden vars: 13,False,0.8636363636363636
-69,HCLT w. hidden vars: 141,False,0.8701298701298701
 69,KNeighborsClassifier,False,0.935064935064935
 69,LogisticRegression,False,0.8311688311688312
+69,RSPN depth 1,False,0.9545454545454546
+69,RSPN depth 10,False,0.961038961038961
+69,RSPN depth 5,False,0.961038961038961
 69,RandomForestClassifier,False,0.974025974025974
 69,pc linear depth 10,False,0.8896103896103896
 69,pc linear depth 2,False,0.8961038961038961
 69,pc linear depth 5,False,0.8896103896103896
 70,DecisionTreeClassifier,False,0.9025974025974026
-70,HCLT w. hidden vars: 13,False,0.551948051948052
-70,HCLT w. hidden vars: 141,False,0.6428571428571429
 70,KNeighborsClassifier,False,0.9285714285714286
 70,LogisticRegression,False,0.7662337662337663
+70,RSPN depth 1,False,0.9025974025974026
+70,RSPN depth 10,False,0.9545454545454546
+70,RSPN depth 5,False,0.9545454545454546
 70,RandomForestClassifier,False,0.9285714285714286
 70,pc linear depth 10,False,0.8766233766233766
 70,pc linear depth 2,False,0.8311688311688312
 70,pc linear depth 5,False,0.8571428571428571
 81,DecisionTreeClassifier,False,0.9935064935064936
-81,HCLT w. hidden vars: 13,False,0.8246753246753247
-81,HCLT w. hidden vars: 141,False,0.8246753246753247
 81,KNeighborsClassifier,False,0.9545454545454546
 81,LogisticRegression,False,0.7532467532467533
+81,RSPN depth 1,False,0.9415584415584416
+81,RSPN depth 10,False,0.9545454545454546
+81,RSPN depth 5,False,0.9545454545454546
 81,RandomForestClassifier,False,0.9805194805194806
 81,pc linear depth 10,False,0.8571428571428571
 81,pc linear depth 2,False,0.8571428571428571
 81,pc linear depth 5,False,0.8441558441558441
 82,DecisionTreeClassifier,False,1.0
-82,HCLT w. hidden vars: 13,False,1.0
-82,HCLT w. hidden vars: 141,False,1.0
 82,KNeighborsClassifier,False,1.0
 82,LogisticRegression,False,0.974025974025974
+82,RSPN depth 1,False,1.0
+82,RSPN depth 10,False,1.0
+82,RSPN depth 5,False,1.0
 82,RandomForestClassifier,False,1.0
 82,pc linear depth 10,False,0.9935064935064936
 82,pc linear depth 2,False,0.9935064935064936
 82,pc linear depth 5,False,0.987012987012987
 85,DecisionTreeClassifier,False,1.0
-85,HCLT w. hidden vars: 13,False,0.961038961038961
-85,HCLT w. hidden vars: 141,False,0.7207792207792207
 85,KNeighborsClassifier,False,0.987012987012987
 85,LogisticRegression,False,0.7597402597402597
+85,RSPN depth 1,False,1.0
+85,RSPN depth 10,False,1.0
+85,RSPN depth 5,False,1.0
 85,RandomForestClassifier,False,1.0
 85,pc linear depth 10,False,0.961038961038961
 85,pc linear depth 2,False,0.9675324675324676
 85,pc linear depth 5,False,0.9675324675324676
 89,DecisionTreeClassifier,False,0.948051948051948
-89,HCLT w. hidden vars: 13,False,0.7792207792207793
-89,HCLT w. hidden vars: 141,False,0.7597402597402597
 89,KNeighborsClassifier,False,0.9025974025974026
 89,LogisticRegression,False,0.7272727272727273
+89,RSPN depth 1,False,0.935064935064935
+89,RSPN depth 10,False,0.961038961038961
+89,RSPN depth 5,False,0.961038961038961
 89,RandomForestClassifier,False,0.9675324675324676
 89,pc linear depth 10,False,0.8181818181818182
 89,pc linear depth 2,False,0.8506493506493507
 89,pc linear depth 5,False,0.7922077922077922
 adult,DecisionTreeClassifier,False,0.8263955234065784
-adult,DecisionTreeClassifier,False,0.82339293025795
-adult,HCLT w. hidden vars: 13,False,0.8243483008052409
-adult,HCLT w. hidden vars: 141,False,0.8263955234065784
+adult,DecisionTreeClassifier,True,0.82339293025795
 adult,KNeighborsClassifier,False,0.8197079295755425
-adult,KNeighborsClassifier,False,0.8223010782039034
+adult,KNeighborsClassifier,True,0.8223010782039034
 adult,LogisticRegression,False,0.7752149583731405
-adult,LogisticRegression,False,0.8269414494336017
+adult,LogisticRegression,True,0.8269414494336017
+adult,RSPN depth 1,False,0.8276238569673809
+adult,RSPN depth 10,False,0.8255766343660434
+adult,RSPN depth 5,False,0.8255766343660434
 adult,RandomForestClassifier,False,0.8268049679268459
-adult,RandomForestClassifier,False,0.8295345980619626
+adult,RandomForestClassifier,True,0.8295345980619626
 adult,pc linear depth 10,False,0.8165688549201583
 adult,pc linear depth 2,False,0.8169782994404258
 adult,pc linear depth 5,False,0.819298485055275
 bank,DecisionTreeClassifier,False,0.9001769389560602
-bank,DecisionTreeClassifier,False,0.9007667354762607
-bank,HCLT w. hidden vars: 13,False,0.9028310232969625
-bank,HCLT w. hidden vars: 141,False,0.9071070480684164
+bank,DecisionTreeClassifier,True,0.9007667354762607
 bank,KNeighborsClassifier,False,0.8905927455028015
-bank,KNeighborsClassifier,False,0.892214685933353
+bank,KNeighborsClassifier,True,0.892214685933353
 bank,LogisticRegression,False,0.8827779416101444
-bank,LogisticRegression,False,0.9001769389560602
+bank,LogisticRegression,True,0.9001769389560602
+bank,RSPN depth 1,False,0.9020937776467118
+bank,RSPN depth 10,False,0.8920672368033029
+bank,RSPN depth 5,False,0.8920672368033029
 bank,RandomForestClassifier,False,0.9041580654674137
-bank,RandomForestClassifier,False,0.9023886759068122
+bank,RandomForestClassifier,True,0.9023886759068122
 bank,pc linear depth 10,False,0.8815983485697434
 bank,pc linear depth 2,False,0.8815983485697434
 bank,pc linear depth 5,False,0.8815983485697434
-secondary-mushrooms,DecisionTreeClassifier,False,0.9991267328894226
-secondary-mushrooms,DecisionTreeClassifier,False,0.9991267328894226
-secondary-mushrooms,HCLT w. hidden vars: 13,False,0.8546010260888549
-secondary-mushrooms,HCLT w. hidden vars: 141,False,0.9624495142451698
-secondary-mushrooms,KNeighborsClassifier,False,1.0
-secondary-mushrooms,KNeighborsClassifier,False,1.0
-secondary-mushrooms,LogisticRegression,False,0.8729396354109813
-secondary-mushrooms,LogisticRegression,False,0.8729396354109813
-secondary-mushrooms,RandomForestClassifier,False,1.0
-secondary-mushrooms,RandomForestClassifier,False,1.0
+secondary-mushrooms,DecisionTreeClassifier,True,0.9991267328894226
+secondary-mushrooms,DecisionTreeClassifier,True,0.9991267328894226
+secondary-mushrooms,KNeighborsClassifier,True,1.0
+secondary-mushrooms,KNeighborsClassifier,True,1.0
+secondary-mushrooms,LogisticRegression,True,0.8729396354109813
+secondary-mushrooms,LogisticRegression,True,0.8729396354109813
+secondary-mushrooms,RSPN depth 1,False,0.8812356729614671
+secondary-mushrooms,RSPN depth 10,False,0.9727104027944548
+secondary-mushrooms,RSPN depth 5,False,0.9727104027944548
+secondary-mushrooms,RandomForestClassifier,True,1.0
+secondary-mushrooms,RandomForestClassifier,True,1.0
 secondary-mushrooms,pc linear depth 10,False,0.6443619692173344
 secondary-mushrooms,pc linear depth 2,False,0.6059382163519267
 secondary-mushrooms,pc linear depth 5,False,0.6135793035694793
 vote,DecisionTreeClassifier,False,0.9393939393939394
-vote,DecisionTreeClassifier,False,0.9393939393939394
-vote,HCLT w. hidden vars: 13,False,0.9393939393939394
-vote,HCLT w. hidden vars: 141,False,0.9090909090909091
+vote,DecisionTreeClassifier,True,0.9393939393939394
 vote,KNeighborsClassifier,False,0.8939393939393939
-vote,KNeighborsClassifier,False,0.8787878787878788
+vote,KNeighborsClassifier,True,0.8787878787878788
 vote,LogisticRegression,False,0.9393939393939394
-vote,LogisticRegression,False,0.9242424242424242
+vote,LogisticRegression,True,0.9242424242424242
+vote,RSPN depth 1,False,0.8636363636363636
+vote,RSPN depth 10,False,0.9545454545454546
+vote,RSPN depth 5,False,0.9545454545454546
 vote,RandomForestClassifier,False,0.9242424242424242
-vote,RandomForestClassifier,False,0.9242424242424242
+vote,RandomForestClassifier,True,0.9242424242424242
 vote,pc linear depth 10,False,0.9090909090909091
 vote,pc linear depth 2,False,0.9242424242424242
 vote,pc linear depth 5,False,0.9242424242424242
