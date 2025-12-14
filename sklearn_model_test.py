@@ -75,14 +75,14 @@ def run_test_for_sklearn_models(datasets_names: List[str], model_name: str, mode
 if __name__ == "__main__":
     dataset_names = get_artificial_ds()
     run_info = [
-        # (dataset_names, "DecisionTreeClassifier", DecisionTreeClassifier, decision_tree_param_grid,
-        #  "results_artificial_datasets_decision_tree.json"),
-        # (dataset_names, "RandomForestClassifier", RandomForestClassifier, random_forest_param_grid,
-        #  "results_artificial_datasets_random_forest.json"),
-        # (dataset_names, "LogisticRegression", LogisticRegression, log_reg_param_grid,
-        #  "results_artificial_datasets_logistic_regression.json"),
-        # (dataset_names, "KNeighborsClassifier", KNeighborsClassifier, nn_param_grid,
-        #  "results_artificial_datasets_nearest_neighbor.json"),
+        (dataset_names, "DecisionTreeClassifier", DecisionTreeClassifier, decision_tree_param_grid,
+         "results_artificial_datasets_decision_tree.json"),
+        (dataset_names, "RandomForestClassifier", RandomForestClassifier, random_forest_param_grid,
+         "results_artificial_datasets_random_forest.json"),
+        (dataset_names, "LogisticRegression", LogisticRegression, log_reg_param_grid,
+         "results_artificial_datasets_logistic_regression.json"),
+        (dataset_names, "KNeighborsClassifier", KNeighborsClassifier, nn_param_grid,
+         "results_artificial_datasets_nearest_neighbor.json"),
     ]
 
     for info in run_info:
@@ -96,16 +96,16 @@ if __name__ == "__main__":
     dataset_names.extend(get_adult_ds())
     dataset_names.extend(get_bank_ds())
     dataset_names.extend(get_vote_ds())
-    # dataset_names.extend(get_secondary_mushrooms_ds())
+    dataset_names.extend(get_secondary_mushrooms_ds())
     run_info = [
-        # (dataset_names, "DecisionTreeClassifier", DecisionTreeClassifier, decision_tree_param_grid,
-        #  "results_secondary_mushrooms_decision_tree.json", False),
-        # (dataset_names, "RandomForestClassifier", RandomForestClassifier, random_forest_param_grid,
-        #  "results_secondary_mushrooms_random_forest.json", False),
-        # (dataset_names, "LogisticRegression", LogisticRegression, log_reg_param_grid,
-        #  "results_secondary_mushrooms_logistic_regression.json", False),
-        # (dataset_names, "KNeighborsClassifier", KNeighborsClassifier, nn_param_grid,
-        #  "results_secondary_mushrooms_nearest_neighbor.json", False),
+        (dataset_names, "DecisionTreeClassifier", DecisionTreeClassifier, decision_tree_param_grid,
+         "results_secondary_mushrooms_decision_tree.json", False),
+        (dataset_names, "RandomForestClassifier", RandomForestClassifier, random_forest_param_grid,
+         "results_secondary_mushrooms_random_forest.json", False),
+        (dataset_names, "LogisticRegression", LogisticRegression, log_reg_param_grid,
+         "results_secondary_mushrooms_logistic_regression.json", False),
+        (dataset_names, "KNeighborsClassifier", KNeighborsClassifier, nn_param_grid,
+         "results_secondary_mushrooms_nearest_neighbor.json", False),
 
         (dataset_names, "DecisionTreeClassifier", DecisionTreeClassifier, decision_tree_param_grid,
          "results_datasets_decision_tree_one_hot.json", True),
@@ -123,8 +123,3 @@ if __name__ == "__main__":
                                               categotrical_to_onehot=info[5])
         with open(info[4], "w") as f:
             json.dump(results, f)
-
-# run everything for secondary-mushrooms check
-# run one-hot for everything else after that and rename the outputs check
-# run mushroom for pc done
-# make flat pc and run tests
