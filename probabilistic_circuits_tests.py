@@ -1,6 +1,7 @@
 import configparser
 import json
 import pathlib
+import random
 import re
 from collections import Counter
 
@@ -103,7 +104,10 @@ def run_pc_test(class_descr, lr, ds_name, depth):
 
     pc = create_probabilistic_circuit(len(num_cat), num_cat, depth)
 
-    optimizer = CircuitOptimizer(pc, lr=lr, method="EM")
+    ns = juice.structures.RAT_SPN(len(train_data[0, :]), 5, 2, 15)
+    pc = juice.compile(ns).to(device)
+
+    optimizer = CircuitOptimizer(pc, lr=lr, method="EM", pseudocount=0.01)
 
     best_val_score = float("-inf")
     best_model_state_dict = None
@@ -145,28 +149,115 @@ def run_pc_test(class_descr, lr, ds_name, depth):
         }
     ]
 
+def run_rspn_test(class_descr, lr, ds_name, depth):
+    device = (
+        torch.device("cuda:0") if torch.cuda.is_available() else torch.device("cpu")
+    )
+
+    torch.manual_seed(SEED)
+
+    train_data = torch.tensor(pd.read_csv(new_dataset_path.joinpath(f"{ds_name}_train.csv"), index_col=0).to_numpy(),
+                              dtype=torch.long)
+    train_loader = DataLoader(TensorDataset(train_data), batch_size=512, shuffle=True)
+    val_data = torch.tensor(pd.read_csv(new_dataset_path.joinpath(f"{ds_name}_val.csv"), index_col=0).to_numpy())
+    val_loader = DataLoader(TensorDataset(val_data), batch_size=100000, shuffle=False)
+    test_data = torch.tensor(pd.read_csv(new_dataset_path.joinpath(f"{ds_name}_test.csv"), index_col=0).to_numpy())
+    test_loader = DataLoader(TensorDataset(test_data), batch_size=10000, shuffle=False)
+
+    hidden_vars = [5,15,25,35]#,45,55, 95]
+    best_val_score = float("-inf")
+    best_hidden_vars_param = -100
+    best_model_state_dict = None
+    for hidden_var in hidden_vars:
+        random.seed(SEED)
+        ns = juice.structures.RAT_SPN(len(train_data[0, :]), hidden_var, depth, 20)
+        pc = juice.compile(ns).to(device)
+
+        optimizer = CircuitOptimizer(pc, lr=lr, method="EM", pseudocount=0.01)
+        no_increase_since = 0
+        for epoch in tqdm(range(1, 5000 + 1)):
+            train_ll = 0.0
+            for batch in train_loader:
+                x = batch[0].to(device)
+                optimizer.zero_grad()
+                lls = pc(x)
+                lls.mean().backward()
+
+                train_ll += lls.mean().detach().cpu().numpy().item()
+                optimizer.step()
+
+            score = get_test_score(pc, val_loader)
+            if score >= best_val_score + 10e-16:
+                no_increase_since = 0
+                best_val_score = score
+                best_hidden_vars_param = hidden_var
+                best_model_state_dict = pc.state_dict()
+                print(f"saving best model at epoch {epoch}, new best score {best_val_score}")
+            else:
+                no_increase_since += 1
+                if no_increase_since >= 100:
+                    break
+    random.seed(SEED)
+    ns = juice.structures.RAT_SPN(len(train_data[0, :]), best_hidden_vars_param, depth, 20)
+    pc = juice.compile(ns).to(device)
+    pc.load_state_dict(best_model_state_dict)
+
+    test_score = get_test_score(pc, test_loader)
+
+    return [
+        {
+            "model_cls": class_descr,
+            "dataset": ds_name,
+            "hidden_vars": best_hidden_vars_param,
+            "is_one_hot": False,
+            "lr": lr,
+            "depth": depth,
+            "test_score": test_score,
+            "val_score": best_val_score
+        }
+    ]
+
 
 datasets = []
-# datasets.extend(get_artificial_ds())
-# datasets.extend(get_adult_ds())
-# datasets.extend(get_bank_ds())
-# datasets.extend(get_vote_ds())
+datasets.extend(get_artificial_ds())
+datasets.extend(get_adult_ds())
+datasets.extend(get_bank_ds())
+datasets.extend(get_vote_ds())
 datasets.extend(get_secondary_mushrooms_ds())
 print(datasets)
 results = []
+
+
 for ds in datasets:
-    res = run_pc_test("HCLT w. hidden vars: 13", 0.01, ds, depth=1)
+    res = run_pc_test("Lin. PC depth 1", 0.1, ds, depth=1)
     print(res)
     results.extend(res)
 
 for ds in datasets:
-    res = run_pc_test("HCLT w. hidden vars: 141", 0.01, ds, depth=30)
+    res = run_pc_test("Lin. PC depth 5", 0.1, ds, depth=5)
     print(res)
     results.extend(res)
 
 for ds in datasets:
-    res = run_pc_test("HCLT w. hidden vars: 141", 0.1, ds, depth=10)
+    res = run_pc_test("Lin. PC depth 5", 0.1, ds, depth=10)
     print(res)
     results.extend(res)
 
-json.dump(results, open("res/results_hclt_13_hidden_vars_all_datasets_tests.json", "w"))
+json.dump(results, open("res/results_lin_pc_all_datasets_tests.json", "w"))
+
+for ds in datasets:
+    res = run_rspn_test("RSPN depth 1", 0.1, ds, depth=1)
+    print(res)
+    results.extend(res)
+
+for ds in datasets:
+    res = run_rspn_test("RSPN depth 5", 0.1, ds, depth=5)
+    print(res)
+    results.extend(res)
+
+for ds in datasets:
+    res = run_rspn_test("RSPN depth 10", 0.1, ds, depth=10)
+    print(res)
+    results.extend(res)
+
+json.dump(results, open("res/results_rspn_all_datasets_tests.json", "w"))
