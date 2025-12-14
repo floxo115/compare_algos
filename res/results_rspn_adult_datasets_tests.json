@@ -1,0 +1,32 @@
+[
+  {
+    "model_cls": "RSPN depth 1",
+    "dataset": "adult",
+    "hidden_vars": 55,
+    "is_one_hot": false,
+    "lr": 0.1,
+    "depth": 1,
+    "test_score": 0.8276238569673809,
+    "val_score": 0.8348348348348348
+  },
+  {
+    "model_cls": "RSPN depth 5",
+    "dataset": "adult",
+    "hidden_vars": 5,
+    "is_one_hot": false,
+    "lr": 0.1,
+    "depth": 5,
+    "test_score": 0.8255766343660434,
+    "val_score": 0.8322413322413322
+  },
+  {
+    "model_cls": "RSPN depth 10",
+    "dataset": "adult",
+    "hidden_vars": 5,
+    "is_one_hot": false,
+    "lr": 0.1,
+    "depth": 10,
+    "test_score": 0.8255766343660434,
+    "val_score": 0.8322413322413322
+  }
+]
